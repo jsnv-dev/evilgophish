@@ -26,7 +26,7 @@ services:
       - ./certs:/app/certs/
     networks:
       evilgophish-net:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 172.20.0.2
 
   evilginx3:
     build:
@@ -35,15 +35,13 @@ services:
     container_name: "evilgophish-evilginx3"
     networks:
       evilgophish-net:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.20.0.3
     expose:
       - "8443"
     environment:
       <<: *default-environment
     volumes:
       - shared-data:/app/gophish/
-    depends_on:
-      - gophish
 
   gophish:
     build:
@@ -62,6 +60,8 @@ services:
       <<: *default-environment
     volumes:
       - shared-data:/app/gophish/
+    depends_on:
+      - apache
 
 networks:
   evilgophish-net:
