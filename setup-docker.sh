@@ -28,5 +28,7 @@ replace_env "${FEED_BOOL}" "FEED_BOOL"
 replace_env "${RID_REPLACEMENT}" "RID_REPLACEMENT"
 replace_env "${BL_BOOL}" "BL_BOOL"
 
+git restore .
+find . -type f -exec sed -i "s|client_id|${RID_REPLACEMENT}|g" {} \;
 # Build Docker images 
 docker compose build 
